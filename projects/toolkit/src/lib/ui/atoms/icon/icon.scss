@@ -1,0 +1,67 @@
+// :host {
+//   display: inline-block;
+//   vertical-align: middle;
+// }
+
+// .icon-renderer {
+//   width: 100%;
+//   height: 100%;
+
+//   // 1. Color base: Usa la variable calculada del computed themeStyles
+//   background-color: var(--ui-color-icon, currentColor);
+
+//   // 2. Comportamiento Hover:
+//   // Solo se activa cuando un ancestro con '.ui-hover-group' recibe el hover
+//   :host-context(.ui-hover-group:hover) & {
+//     background-color: currentColor !important;
+//   }
+
+//   // 3. Configuración de la máscara
+//   mask-repeat: no-repeat;
+//   -webkit-mask-repeat: no-repeat;
+//   mask-size: contain;
+//   -webkit-mask-size: contain;
+//   mask-position: center;
+//   -webkit-mask-position: center;
+// }
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor; // Por si falla la variable
+
+  :host-context(.ui-hover-group:hover) & {
+    fill: currentColor !important;
+  }
+}
+
+.icon-renderer {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  // Solo para SVGs externos (Máscaras)
+  &:not(.is-image) {
+    background-color: var(--ui-color-icon, currentColor);
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    mask-position: center;
+
+    :host-context(.ui-hover-group:hover) & {
+      background-color: currentColor !important;
+    }
+  }
+
+  // Para PNG/JPG
+  &.is-image {
+    background-color: transparent;
+  }
+}

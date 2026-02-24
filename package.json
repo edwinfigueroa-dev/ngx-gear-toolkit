@@ -6,7 +6,11 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "toolkit:build": "ng build toolkit",
+    "toolkit:lint": "ng lint toolkit",
+    "toolkit:test": "ng test toolkit --no-watch --no-progress --browsers=ChromeHeadless",
+    "toolkit:publish": "npm run toolkit:test && npm run toolkit:build && npm publish dist/toolkit"
   },
   "prettier": {
     "printWidth": 100,

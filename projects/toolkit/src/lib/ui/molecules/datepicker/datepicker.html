@@ -1,0 +1,139 @@
+<div class="flex flex-col group" [style]="themeStyles()">
+  @if (label() && labelAppearance() === 'outside') {
+    <label 
+      [class]="'mb-0.5 text-sm font-medium ' + labelClass()"
+      [style.color]="focused() || hasError() ? 'var(--ui-color-text)' : ''">
+      {{ label() }}
+      @if (required() && showAsteriskRequired()) {<span class="text-red-600">*</span>}
+    </label>
+  }
+
+  <div class="relative w-full">
+    <div 
+      [class]="'relative cursor-pointer flex flex-row items-center px-3 bg-white border transition-all active:scale-[0.98] '+classContainer()"
+      [class.h-6]="size() === 'xs'"
+      [class.h-8]="size() === 'sm'"
+      [class.h-10]="size() === 'md'"
+      [class.h-12]="size() === 'lg'"
+      [class.h-14]="size() === 'xl'"
+      [class.rounded-full]="borderAppearance() === 'full'"
+      [class.rounded-lg]="borderAppearance() === 'rounded'"
+      [class.ring-1]="focused()"
+      [style.border-color]="focused() || hasError() ? 'var(--ui-color-main)' : 'var(--color-gray-300)'"
+      [style.--tw-ring-color]="focused() ? 'var(--ui-color-main)' : ''"
+      [class.opacity-50]="disabled()"
+      [class.pointer-events-none]="disabled()"
+      (click)="toggle()"
+      >
+
+      @if (label() && labelAppearance() === 'border') {
+        <label 
+          [class]="'absolute left-3 px-1 -top-2.5 text-xs font-medium bg-white pointer-events-none z-10' + labelClass()"
+          [style.color]="focused() || hasError() ? 'var(--ui-color-text)' : 'var(--color-gray-500)'">
+          {{ label() }}
+          @if (required() && showAsteriskRequired()) {<span class="text-red-600">*</span>}
+        </label>
+      }
+
+      <span class="flex-1">
+        {{ formattedDate }}
+      </span>
+
+      <span class="material-icons transition-colors" [class]="isOpen() && !hasError()? 'text-(--ui-color-main)' : 'text-gray-400'">calendar_today</span>
+
+      @if (showClear() && selectedValue()) {
+        <button (click)="clearInput($event)" type="button" class="pl-1 flex items-center cursor-pointer text-gray-400 hover:text-gray-600 shrink-0">
+          <span class="material-icons text-lg">close</span>
+        </button>
+      }
+
+       @if (loading()) {
+        <div class="pl-1 shrink-0 cursor-auto">
+          <div 
+            class="w-4 h-4 border-2 border-t-transparent rounded-full animate-spin"
+            [style.border-color]="'var(--ui-color-main) var(--ui-color-main) transparent var(--ui-color-main)'">
+          </div>
+        </div>
+      }
+      
+    </div>
+
+    @if (isOpen()) {
+      <div class="fixed inset-0 bg-black/40 z-40 md:hidden backdrop-blur-sm animate-in fade-in duration-300" (click)="toggle()"></div>
+
+      <div class="fixed bottom-0 left-0 w-full bg-white rounded-t-[2.5rem] p-6 z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.15)] 
+                  md:absolute md:bottom-auto md:top-full md:mt-2 md:w-[320px] md:rounded-2xl md:p-4 md:shadow-2xl animate-in slide-in-from-bottom md:zoom-in-95 duration-200">
+        
+        <div class="flex items-center justify-between mb-4 px-2">
+          <button type="button" (click)="changeMonth(-1)" class="p-2 hover:bg-gray-100 rounded-full transition-colors active:scale-90">
+            <i class="material-icons text-gray-600">chevron_left</i>
+          </button>
+          
+          <button type="button" (click)="showYearPicker.set(!showYearPicker())" 
+                  class="flex items-center gap-1 text-sm text-gray-800 transition-colors uppercase tracking-wider">
+            {{ viewDate() | date:'MMMM yyyy' }}
+            <i class="material-icons text-xs">{{ showYearPicker() ? 'expand_less' : 'expand_more' }}</i>
+          </button>
+
+          <button type="button" (click)="changeMonth(1)" class="p-2 hover:bg-gray-100 rounded-full transition-colors active:scale-90">
+            <i class="material-icons text-gray-600">chevron_right</i>
+          </button>
+        </div>
+
+        @if (showYearPicker()) {
+          <div class="grid grid-cols-4 gap-2 h-64 overflow-y-auto p-2 scrollbar-hide">
+            @for (year of years(); track year) {
+              <button type="button"
+                      (click)="setYear(year)" 
+                      [class.bg-[var(--ui-color-main)]]="viewDate().getFullYear() === year"
+                      [class.text-white]="viewDate().getFullYear() === year"
+                      class="py-3 text-sm font-semibold rounded-xl hover:bg-(--ui-primary-light) transition-colors">
+                {{ year }}
+              </button>
+            }
+          </div>
+        } @else {
+          <div class="grid grid-cols-7 gap-1 text-center">
+            @for (day of weekDays; track day) {
+              <span class="text-[10px] font-black text-gray-400 uppercase py-2 tracking-tighter">{{ day }}</span>
+            }
+
+            @for (item of calendarGrid(); track item.date.getTime()) {
+              <div (click)="selectDate(item.date)"
+                   [class.opacity-25]="!item.currentMonth || item.disabled"
+                   [class.pointer-events-none]="item.disabled"
+                   [class.bg-[var(--ui-color-main)]]="isSelected(item.date)"
+                   [class.text-white]="isSelected(item.date)"
+                   [class.ring-2]="isToday(item.date) && !isSelected(item.date)"
+                   [class.ring-[var(--ui-color-main)]]="isToday(item.date) && !isSelected(item.date)"
+                   class="aspect-square flex items-center justify-center text-xs rounded-full cursor-pointer transition-all">
+                {{ item.date.getDate() }}
+              </div>
+            }
+          </div>
+        }
+
+        <div class="mt-4 pt-4 border-t border-gray-100 flex gap-3">
+          <button (click)="setToday()" 
+                  type="button"
+                  class="flex-1 py-3 text-xs font-black uppercase tracking-widest text-(--ui-color-main) rounded-xl transition-colors active:scale-95">
+            Hoy
+          </button>
+          <button (click)="toggle()" type="button" class="flex-1 py-3 text-xs font-black uppercase text-gray-400 md:hidden">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="px-2 min-h-4 h-4 mt-0.5">
+    @if (hasError()) {
+      <span class="text-[12px] text-red-500 font-medium animate-in fade-in slide-in-from-top-1 block">
+        {{ currentErrorMessage() }}
+      </span>
+    } @else if (hint()) {
+      <span class="text-[12px] text-gray-500 block">{{ hint() }}</span>
+    }
+  </div>
+</div>

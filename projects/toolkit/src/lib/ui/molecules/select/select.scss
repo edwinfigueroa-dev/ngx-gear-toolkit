@@ -1,0 +1,20 @@
+:host {
+  display: block;
+  outline: none; // Evita el borde en el componente padre
+}
+
+.relative {
+  // Evita que el usuario seleccione el texto del dropdown al hacer doble clic
+  user-select: none; 
+  -webkit-user-select: none;
+  
+  &:focus {
+    outline: none; // Refuerzo para navegadores específicos
+  }
+}
+
+// Opcional: Si quieres que el icono no se vea "azul" al hacer click largo
+.material-icons {
+  user-select: none;
+  pointer-events: none;
+}

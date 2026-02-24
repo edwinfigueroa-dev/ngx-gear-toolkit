@@ -1,0 +1,60 @@
+<div 
+  (mouseenter)="setHover(true)"
+  (mouseleave)="setHover(false)"
+  (touchstart)="onTouchStart($event)"
+  (touchend)="onTouchEnd($event)"
+  [class]="'relative group mx-auto transition-all ' + (arrowsPosition() === 'outside' ? 'px-16' : '') + ' ' + containerClass()">
+  
+  <div class="relative overflow-hidden rounded-3xl w-full h-full shadow-sm">
+    <div 
+      [class]="'flex h-full ' + (isTransitioning() ? 'transition-transform duration-500 ease-in-out' : 'transition-none')"
+      [style.transform]="'translateX(-' + currentIndex() * 100 + '%)'">
+      
+      @for (item of slides(); track $index) {
+        <div class="min-w-full w-full shrink-0">
+          <div [class]="'h-full transition-all duration-700 delay-100 ' + 
+                        (animateContent() && currentIndex() === $index ? 'opacity-100 translate-y-0 scale-100' : 
+                         animateContent() ? 'opacity-0 translate-y-4 scale-95' : '')">
+            <ng-container [ngTemplateOutlet]="item.template"></ng-container>
+          </div>
+        </div>
+      }
+    </div>
+
+    @if (slides().length > 1 && dotsPosition() === 'inside') {
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+        @for (s of slides(); track $index) {
+          <button (click)="goTo($index)" type="button"
+            [class]="'h-1.5 rounded-full transition-all duration-300 cursor-pointer ' + (currentIndex() === $index ? 'w-10 bg-white' : 'w-2 bg-white/50')">
+          </button>
+        }
+      </div>
+    }
+  </div>
+
+  @if (slides().length > 1 && dotsPosition() === 'outside') {
+    <div class="flex justify-center gap-3 mt-6">
+      @for (s of slides(); track $index) {
+        <button (click)="goTo($index)" type="button"
+          [class]="'h-1.5 rounded-full transition-all duration-300 cursor-pointer ' + (currentIndex() === $index ? 'w-10 bg-green-600' : 'w-2 bg-gray-300')">
+        </button>
+      }
+    </div>
+  }
+
+  @if (showArrows() && slides().length > 1) {
+    <button (click)="prev()" type="button"
+      [class]="'absolute top-1/2 -translate-y-1/2 z-30 flex items-center justify-center p-3 rounded-full transition-all cursor-pointer ' + 
+               (arrowsPosition() === 'inside' ? 'left-4 ' : 'left-0 ') + 
+               (arrowClass() || 'bg-black/20 hover:bg-black/40 text-white backdrop-blur-sm')">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+
+    <button (click)="next()" type="button"
+      [class]="'absolute top-1/2 -translate-y-1/2 z-30 flex items-center justify-center p-3 rounded-full transition-all cursor-pointer ' + 
+               (arrowsPosition() === 'inside' ? 'right-4 ' : 'right-0 ') + 
+               (arrowClass() || 'bg-black/20 hover:bg-black/40 text-white backdrop-blur-sm')">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  }
+</div>

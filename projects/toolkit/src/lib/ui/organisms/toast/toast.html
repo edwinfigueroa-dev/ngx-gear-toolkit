@@ -1,0 +1,24 @@
+@for (pos of activePositions(); track pos) {
+  <div [class]="'fixed z-9999 flex gap-3 min-w-75 max-w-md p-5 pointer-events-none ' + getPositionClasses(pos)">
+    @for (toast of getToastsByPosition(pos); track toast.id) {
+      <div class="pointer-events-auto p-2 rounded-lg shadow-xl border-l-8 flex justify-between bg-white animate-slide-in"
+            [ngClass]="getSeverityClass(toast.severity)"
+            [style.--toast-start-y]="pos.startsWith('bottom') ? '20px' : '-20px'">
+        <div class="flex flex-col">
+          <span class="font-bold">{{ toast.summary }}</span>
+          <span class="text-sm">{{ toast.detail }}</span>
+        </div>
+        <button (click)="toastService.remove(toast.id!)" class="ml-2 opacity-50 flex justify-start items-start cursor-pointer">✕</button>
+      </div>
+    }
+  </div>
+}
+
+@if (isVisible()) {
+  <div [class]="'fixed z-9999 flex p-5 pointer-events-none ' + getPositionClasses(position())">
+    <div class="pointer-events-auto animate-slide-in" 
+          [style.--toast-start-y]="position().startsWith('bottom') ? '20px' : '-20px'">
+      <ng-content />
+    </div>
+  </div>
+}

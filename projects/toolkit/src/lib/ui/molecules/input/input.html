@@ -1,0 +1,88 @@
+<div class="flex flex-col group" [style]="themeStyles()">
+  
+  @if (label() && labelAppearance() === 'outside') {
+    <label 
+      [class]="'mb-0.5 text-sm font-medium ' + labelClass()"
+      [style.color]="inputDirective()?.focused() || hasError() ? 'var(--ui-color-text)' : ''">
+      {{ label() }}
+      @if (inputDirective()?.required() && showAsteriskRequired()) {<span class="text-red-600">*</span>}
+    </label>
+  }
+
+  <div 
+    [class]="'relative flex flex-row items-center bg-white border pr-3 '+classContainer()"
+    [class.h-6]="size() === 'xs'"
+    [class.h-8]="size() === 'sm'"
+    [class.h-10]="size() === 'md'"
+    [class.h-12]="size() === 'lg'"
+    [class.h-14]="size() === 'xl'"
+    [class.rounded-full]="borderAppearance() === 'full'"
+    [class.rounded-lg]="borderAppearance() === 'rounded'"
+    [class.ring-1]="inputDirective()?.focused()"
+    [style.border-color]="inputDirective()?.focused() || hasError() ? 'var(--ui-color-main)' : 'var(--color-gray-300)'"
+    [style.--tw-ring-color]="inputDirective()?.focused() ? 'var(--ui-color-main)' : ''"
+  >
+    @if (label() && labelAppearance() === 'border') {
+      <label 
+        [class]="'absolute left-3 px-1 -top-2.5 text-xs font-medium bg-white pointer-events-none z-10' + labelClass()"
+        [style.color]="inputDirective()?.focused() || hasError() ? 'var(--ui-color-text)' : 'var(--color-gray-500)'">
+        {{ label() }}
+        @if (inputDirective()?.required() && showAsteriskRequired()) {<span class="text-red-600">*</span>}
+      </label>
+    }
+
+    @if (prefix()) {
+      <span class="pl-3 text-gray-500 text-sm select-none shrink-0">{{ prefix() }}</span>
+    }
+
+    @if (startIcon()) {
+      <div class="pl-3 flex items-center justify-center text-gray-400 shrink-0">
+        <ng-content select="[startIcon]" />
+      </div>
+    }
+
+    <div class="flex-1 h-full flex items-center min-w-0">
+      <ng-content />
+    </div>
+
+    @if (showClear() && inputDirective()?.value()) {
+      <button (click)="clearInput()" type="button" class="pl-1 flex items-center cursor-pointer text-gray-400 hover:text-gray-600 shrink-0">
+        <span class="material-icons text-lg">close</span>
+      </button>
+    }
+
+    @if (isPassword()) {
+      <button (click)="togglePassword()" type="button" class="pl-1 flex items-center cursor-pointer text-gray-400 hover:text-gray-600 shrink-0">
+        <span class="material-icons text-sm">{{ showPassword() ? 'visibility_off' : 'visibility' }}</span>
+      </button>
+    }
+
+    @if (loading()) {
+      <div class="pl-1 shrink-0">
+        <div class="w-4 h-4 border-2 border-t-transparent rounded-full animate-spin"
+            [style.border-color]="'var(--ui-color-main) var(--ui-color-main) transparent var(--ui-color-main)'">
+        </div>
+      </div>
+    }
+
+    @if (suffix()) {
+      <span class="pl-1 text-gray-500 text-sm select-none shrink-0">{{ suffix() }}</span>
+    }
+
+    @if (endIcon()) {
+      <div class="pl-1 flex items-center justify-center text-gray-400 shrink-0">
+        <ng-content select="[endIcon]" />
+      </div>
+    }
+  </div>
+
+  <div class="px-2 min-h-4 h-auto ">
+    @if (hasError()) {
+      <span class="text-[12px] text-red-500 font-medium animate-in fade-in slide-in-from-top-1 block">
+        {{ currentErrorMessage() }}
+      </span>
+    } @else if (hint()) {
+      <span class="text-[12px] text-gray-500 block">{{ hint() }}</span>
+    }
+  </div>
+</div>

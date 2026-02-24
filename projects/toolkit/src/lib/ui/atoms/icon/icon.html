@@ -1,0 +1,31 @@
+@switch (type()) {
+  @case ('internal') {
+    <svg 
+      [class]="'icon-svg ' + classIcon()"
+      viewBox="0 0 24 24" 
+      [style.fill]="'var(--ui-color-icon)'"
+      [style]="themeStyles()">
+      <path [attr.d]="internalPath()"></path>
+    </svg>
+  }
+
+  @case ('sprite') {
+    <svg 
+      [class]="'icon-svg ' + classIcon()"
+      [style.fill]="'var(--ui-color-icon)'"
+      [style]="themeStyles()">
+      <use [attr.href]="path()"></use>
+    </svg>
+  }
+
+  @default {
+    <div 
+      [class]="'icon-renderer ' + classIcon()" 
+      [class.is-image]="type() === 'image'"
+      [style.mask-image]="type() === 'mask' ? urlPath() : 'none'"
+      [style.-webkit-mask-image]="type() === 'mask' ? urlPath() : 'none'"
+      [style.background-image]="type() === 'image' ? urlPath() : 'none'"
+      [style]="themeStyles()">
+    </div>
+  }
+}
