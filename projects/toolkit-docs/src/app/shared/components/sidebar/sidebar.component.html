@@ -1,0 +1,72 @@
+<!-- sidebar.component.html -->
+<aside
+    class="sidenav transition-all duration-300 bg-gray-100 dark:bg-gray-900 scroll shadow py-4 z-50"
+    [ngClass]="isCollapsed() && !isHovered() ? 'w-0 px-0 sm:w-11.5 sm:px-2' : 'w-64 px-3'" (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()"
+>
+    <ul class="space-y-2">
+        @for (item of menuItems; track i; let i = $index) {
+        <li>
+            <!-- ITEM SIN HIJOS -->
+            @if (!item.children) {
+            <a 
+                [routerLink]="item.route"
+                routerLinkActive="bg-gray-800 text-white"
+                class="group h-7 flex items-center p-1 dark:text-white rounded-md hover:bg-gray-800 hover:text-white transition-colors"
+                (click)="onItemClicked()"
+            >
+                <span class="material-icons text-sm! group-hover:text-white ml-1">{{ item.icon }}</span>
+                @if (!isCollapsed() || isHovered()) {
+                <span class="ml-3 overflow-hidden text-sm">{{ item.label }}</span>
+                }
+            </a>
+            }
+
+            <!-- ITEM CON HIJOS -->
+            @if (item.children) {
+            <div>
+                <button
+                    class="flex w-full items-center justify-between p-1 dark:text-white rounded-md hover:bg-gray-800 hover:text-white transition-colors"
+                    (click)="toggleSubmenu(i)"
+                >
+                    <div class="flex items-center">
+                        <span class="material-icons text-sm! hover:text-white ml-1">{{ item.icon }}</span>
+                        @if (!isCollapsed() || isHovered()) {
+                        <span class="ml-3 text-sm">{{ item.label }}</span>
+                        }
+                    </div>
+                    @if (!isCollapsed() || isHovered()) {
+                    <span class="material-icons text-sm! hover:text-white duration-300" [ngClass]="{ 'rotate-90': toggleStates[i] }">chevron_right</span>
+                    }
+                </button>
+
+                <!-- SUBMENÚ -->
+                @if (toggleStates[i]) {
+                    <ul
+                        class="mt-1 space-y-1"
+                        [ngClass]="isCollapsed() && !isHovered() ? 'ml-0' : 'ml-4'"
+                    >
+                      @for (child of item.children; track j; let j = $index) {
+                        <li>
+                            <a 
+                                [routerLink]="child.route"
+                                routerLinkActive="bg-gray-800 text-white"
+                                [routerLinkActiveOptions]="{ exact: true }"
+                                class="group h-7 flex items-center p-1 dark:text-white rounded-md hover:bg-gray-800 hover:text-white transition-colors"
+                                (click)="onItemClicked()"
+                            >
+                                <span class="material-icons text-sm! group-hover:text-white ml-1">{{ child.icon }}</span>
+                                @if (!isCollapsed() || isHovered()) {
+                                <span class="ml-3 overflow-hidden text-sm">{{ child.label }}</span>
+                                }
+                            </a>
+                        </li>
+                      }
+                    </ul>
+                }
+            </div>
+            }
+        </li>
+        }
+    </ul>
+</aside>

@@ -1,6 +1,6 @@
 import { Component, inject, computed, signal, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UiToastService, ToastPosition, ToastConfig } from './services/ui-toast.service';
+import { UiToastService, ToastPosition } from './services/ui-toast.service';
 
 @Component({
   selector: 'ui-toast',

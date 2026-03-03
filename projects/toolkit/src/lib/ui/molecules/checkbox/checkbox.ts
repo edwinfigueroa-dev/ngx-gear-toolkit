@@ -1,6 +1,6 @@
 import { Component, input, computed, inject, ChangeDetectionStrategy, output } from '@angular/core';
 import { UiCheckboxDirective } from './directives/ui-checkbox.directive';
-import { SafeHtmlPipe } from '@lib/pipe';
+import { SafeHtmlPipe } from '../../../pipe/safe-html.pipe';
 
 @Component({
   selector: 'ui-checkbox',

@@ -12,7 +12,7 @@ import {
   hasNumber,
   hasSpecial,
   areEquals,
-} from '@lib/utils';
+} from '../../lib/utils/validation-rules';
 
 export const numbersValidator = (allowedSpecialChars: string = ''): ValidatorFn => {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -159,6 +159,7 @@ export const matchValidator = (controlName: string, matchingControlName: string)
 //   }
 // }
 // */
+
 export const matchControlValidator = (otherControl: AbstractControl): ValidatorFn => {
   return (control: AbstractControl): ValidationErrors | null => {
     if (!control.value) return null;

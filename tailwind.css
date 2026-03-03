@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* Variante dark */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Librería */
+@source "./projects/toolkit/src";
+
+/* App demo */
+@source "./projects/toolkit-docs/src";

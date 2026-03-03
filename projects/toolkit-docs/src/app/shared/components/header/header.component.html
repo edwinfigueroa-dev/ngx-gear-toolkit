@@ -1,0 +1,20 @@
+<div class="fixed top-0 right-0 left-0 z-50 h-16 w-full flex items-center bg-white dark:bg-gray-900 transition-colors duration-300 shadow px-2 sm:px-4">
+    <div class="flex justify-between w-full">
+
+        <div class="flex items-center gap-1 sm:gap-8">
+            <button class="text-black dark:text-white w-10 h-10 cursor-pointer" (click)="toggleSidebar()">
+                <span class="material-icons">menu</span>
+            </button>
+            <div class="overflow-hidden">
+                <img [src]="darkModeEnabled() ? 'imgs/logo_negro.svg' : 'imgs/logo_blanco.svg'" alt="logo-library" class="bg-white rounded-full min-h-10 h-10">
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-4">
+            <!-- Boton dark mode -->
+            <button mat-icon-button (click)="toggleDarkMode()" class="text-gray-900 dark:text-white w-10 h-10 cursor-pointer">
+                <span class="material-icons">{{ darkModeEnabled() ? 'light_mode' : 'dark_mode' }}</span>
+            </button>
+        </div>
+    </div>
+</div>

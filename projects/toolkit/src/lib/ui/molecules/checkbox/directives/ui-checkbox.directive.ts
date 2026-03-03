@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { BaseControlDirective } from '@lib/directives/base-control.directive';
+import { BaseControlDirective } from '../../../../directives/base-control.directive';
 
 @Directive({
   selector: 'ui-checkbox',

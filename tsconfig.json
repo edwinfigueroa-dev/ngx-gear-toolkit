@@ -33,6 +33,12 @@
     },
     {
       "path": "./projects/toolkit/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/toolkit-docs/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/toolkit-docs/tsconfig.spec.json"
     }
   ]
 }

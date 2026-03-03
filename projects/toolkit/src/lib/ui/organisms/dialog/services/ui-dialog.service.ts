@@ -1,4 +1,4 @@
-import { Injectable, Type, ViewContainerRef, inject, ApplicationRef, createComponent, EnvironmentInjector, ComponentRef } from '@angular/core';
+import { Injectable, Type, ViewContainerRef, inject, ApplicationRef, createComponent, EnvironmentInjector } from '@angular/core';
 import { UiDialogComponent } from '../dialog';
 import { Subject } from 'rxjs';
 

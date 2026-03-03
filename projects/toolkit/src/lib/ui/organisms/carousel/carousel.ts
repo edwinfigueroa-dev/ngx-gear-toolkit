@@ -1,4 +1,4 @@
-import { Component, contentChildren, signal, computed, input, effect, untracked } from '@angular/core';
+import { Component, contentChildren, signal, input, effect, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UiCarouselItemDirective } from './directives/ui-carousel-item.directive';
 
