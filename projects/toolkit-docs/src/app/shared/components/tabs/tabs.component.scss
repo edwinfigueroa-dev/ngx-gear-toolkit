@@ -1,0 +1,12 @@
+::ng-deep .mat-mdc-menu-panel {
+    max-width: none !important;
+    overflow: visible !important;
+}
+
+::ng-deep .mat-mdc-menu-content {
+    padding: 0 !important;
+}
+
+.user-menu-panel {
+    margin-top: 12px !important;
+}

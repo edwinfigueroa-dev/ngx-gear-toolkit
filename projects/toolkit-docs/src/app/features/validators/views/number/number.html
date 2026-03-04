@@ -1,0 +1,22 @@
+<div class="mb-4">
+    <h2 class="text-2xl font-semibold">Numbers Validators</h2>
+    <p class="text-sm">Una explicacion corta de para que sirve este validator en los formularios</p>
+</div>
+
+<div class="rounded border border-gray-200 p-2">
+    <ui-input 
+        color="gray-800"
+        label="Example One"
+        labelClass="mx-2"
+        borderAppearance="rounded"
+        [errorMessages]="{
+            'invalidNumber': 'El campo debe ser un número válido',
+        }"
+    >
+        <input
+            uiInput
+            type="text"
+            [formControl]="exampleOne"
+        />
+    </ui-input>
+</div>
