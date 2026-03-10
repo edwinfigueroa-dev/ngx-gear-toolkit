@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, input, output } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 export interface MenuItem {
   label: string;
@@ -14,7 +15,7 @@ export interface MenuItem {
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, TranslateModule, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
@@ -31,30 +32,30 @@ export class SidebarComponent {
   openIndex: number | null = null;
   menuItems: MenuItem[] = [
     {
-      label: 'Getting started',
+      label: 'SIDEBAR.GETTING_STARTED.TITLE',
       icon: 'dashboard',
       route: '/main'
     },
     {
-      label: 'UI Components',
+      label: 'SIDEBAR.UI_COMPONENTS.TITLE',
       icon: 'palette',
       children: [
-        { label: 'Button', icon: '', route: '/ui/button' },
-        { label: 'Sppiner', icon: '', route: '/ui/sppiner' }
+        { label: 'SIDEBAR.UI_COMPONENTS.BUTTON', icon: '', route: '/ui/button' },
+        { label: 'SIDEBAR.UI_COMPONENTS.SPPINER', icon: '', route: '/ui/sppiner' }
       ]
     },
     {
-      label: 'Validators',
+      label: 'SIDEBAR.VALIDATORS.TITLE',
       icon: 'gavel',
       children: [
-        { label: 'Numbers', icon: '', route: '/validators/number' },
-        { label: 'Letters', icon: '', route: '/validators/letter' },
-        { label: 'Email', icon: '', route: '/validators/email' },
-        { label: 'Alphanumeric', icon: '', route: '/validators/alphanumeric' },
-        { label: 'Uppercase', icon: '', route: '/validators/uppercase' },
-        { label: 'Lowercase', icon: '', route: '/validators/lowercase' },
-        { label: 'Forbidden Special Chars', icon: '', route: '/validators/forbiddenSpecialChars' },
-        { label: 'Dynamic Validator', icon: '', route: '/validators/dynamicValidator' },
+        { label: 'SIDEBAR.VALIDATORS.NUMBERS', icon: '', route: '/validators/number' },
+        { label: 'SIDEBAR.VALIDATORS.LETTERS', icon: '', route: '/validators/letter' },
+        { label: 'SIDEBAR.VALIDATORS.EMAIL', icon: '', route: '/validators/email' },
+        { label: 'SIDEBAR.VALIDATORS.ALPHANUMERIC', icon: '', route: '/validators/alphanumeric' },
+        { label: 'SIDEBAR.VALIDATORS.UPPERCASE', icon: '', route: '/validators/uppercase' },
+        { label: 'SIDEBAR.VALIDATORS.LOWERCASE', icon: '', route: '/validators/lowercase' },
+        { label: 'SIDEBAR.VALIDATORS.FORBIDDEN_SPECIAL_CHARS', icon: '', route: '/validators/forbiddenSpecialChars' },
+        { label: 'SIDEBAR.VALIDATORS.DYNAMIC_VALIDATOR', icon: '', route: '/validators/dynamicValidator' },
       ]
     },
   ];

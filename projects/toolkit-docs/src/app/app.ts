@@ -6,6 +6,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { DarkModeService } from './core/services/dark-mode.service';
+import { Translatei18nService } from './core/services/translate-i18n.service';
 
 @Component({
   selector: 'app-root',
@@ -20,12 +21,14 @@ import { DarkModeService } from './core/services/dark-mode.service';
   styleUrl: './app.scss'
 })
 export class App {
-  _darkModeService = inject(DarkModeService);
+  private _darkModeService = inject(DarkModeService);
+  private _translatei18nService = inject(Translatei18nService);
 
   isCollapsedSignal = signal<boolean>(false);
   isHoveredSignal = signal<boolean>(false);
 
   constructor() {
     this._darkModeService.init();
+    this._translatei18nService.setInitialLanguage();
   }
 }

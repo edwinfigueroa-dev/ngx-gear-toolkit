@@ -12,12 +12,12 @@
             <a 
                 [routerLink]="item.route"
                 routerLinkActive="bg-gray-800 text-white"
-                class="group h-7 flex items-center p-1 dark:text-white rounded-md hover:bg-gray-800 hover:text-white transition-colors"
+                class="group min-h-7 flex items-center p-1 dark:text-white rounded-md hover:bg-gray-800 hover:text-white transition-colors"
                 (click)="onItemClicked()"
             >
                 <span class="material-icons text-sm! group-hover:text-white ml-1">{{ item.icon }}</span>
                 @if (!isCollapsed() || isHovered()) {
-                <span class="ml-3 overflow-hidden text-sm">{{ item.label }}</span>
+                <span class="ml-3 overflow-hidden text-sm">{{ item.label | translate }}</span>
                 }
             </a>
             }
@@ -32,7 +32,7 @@
                     <div class="flex items-center">
                         <span class="material-icons text-sm! hover:text-white ml-1">{{ item.icon }}</span>
                         @if (!isCollapsed() || isHovered()) {
-                        <span class="ml-3 text-sm">{{ item.label }}</span>
+                        <span class="ml-3 text-sm">{{ item.label | translate }}</span>
                         }
                     </div>
                     @if (!isCollapsed() || isHovered()) {
@@ -52,12 +52,12 @@
                                 [routerLink]="child.route"
                                 routerLinkActive="bg-gray-800 text-white"
                                 [routerLinkActiveOptions]="{ exact: true }"
-                                class="group h-7 flex items-center p-1 dark:text-white rounded-md hover:bg-gray-800 hover:text-white transition-colors"
+                                class="group min-h-7 flex items-center p-1 dark:text-white rounded-md hover:bg-gray-800 hover:text-white transition-colors"
                                 (click)="onItemClicked()"
                             >
                                 <span class="material-icons text-sm! group-hover:text-white ml-1">{{ child.icon }}</span>
                                 @if (!isCollapsed() || isHovered()) {
-                                <span class="ml-3 overflow-hidden text-sm">{{ child.label }}</span>
+                                <span class="ml-3 overflow-hidden text-sm">{{ child.label | translate }}</span>
                                 }
                             </a>
                         </li>

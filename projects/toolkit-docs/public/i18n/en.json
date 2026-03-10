@@ -1,0 +1,34 @@
+{
+    "LANG": {
+        "en": "English",
+        "es": "Spanish"
+    },
+    "HEADER": {
+        "TITLE": "NGX-GEAR Toolkit"
+    },
+    "SIDEBAR": {
+        "GETTING_STARTED": {
+            "TITLE": "Getting started"
+        },
+        "UI_COMPONENTS": {
+            "TITLE": "UI Components",
+            "BUTTON": "Button",
+            "SPPINER": "Sppiner"
+        },
+        "DIRECTIVES": "Directives",
+        "PIPES": "Pipes",
+        "UTILS": "Utils",
+        "HELPERS": "Helpers",
+        "VALIDATORS": {
+            "TITLE": "Validators",
+            "NUMBERS": "Numbers",
+            "LETTERS": "Letters",
+            "EMAIL": "Email",
+            "ALPHANUMERIC": "Alphanumeric",
+            "UPPERCASE": "Uppercase",
+            "LOWERCASE": "Lowercase",
+            "FORBIDDEN_SPECIAL_CHARS": "Forbidden Special Chars",
+            "DYNAMIC_VALIDATOR": "Dynamic Validator"
+        }
+    }
+}
