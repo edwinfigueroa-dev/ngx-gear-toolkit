@@ -1,0 +1,27 @@
+<div class="flex flex-col w-full" [style]="themeVars()">
+  <div class="flex items-center border-b border-gray-200 overflow-x-auto scrollbar-hide">
+    @for (tab of tabs(); track $index) {
+      <button 
+        type="button"
+        (click)="selectTab($index)"
+        [class.text-[var(--tabs-active)]]="selectedIndex() === $index"
+        [class.text-gray-500]="selectedIndex() !== $index"
+        class="relative flex items-center gap-2 px-6 py-4 text-sm font-bold transition-all hover:bg-(--tabs-hover) whitespace-nowrap group">
+        
+        <ng-content select="[ui-tab-icon]"></ng-content>
+        
+        <span>{{ tab.label() }}</span>
+
+        @if (selectedIndex() === $index) {
+          <div class="absolute bottom-0 left-0 w-full h-0.5 bg-(--tabs-active) animate-in fade-in slide-in-from-left duration-200"></div>
+        }
+      </button>
+    }
+  </div>
+
+  <div class="py-6">
+    @if (activeTab()) {
+      <ng-container [ngTemplateOutlet]="activeTab()!.template()"></ng-container>
+    }
+  </div>
+</div>

@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { numbersValidator, UiInput } from 'toolkit';
+import { numbersValidator, UiInput, UiTabs } from 'toolkit';
 
 
 @Component({
   selector: 'app-number',
-  imports: [CommonModule, ReactiveFormsModule, UiInput],
+  imports: [CommonModule, ReactiveFormsModule, UiInput, UiTabs],
   templateUrl: './number.html',
   styleUrl: './number.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

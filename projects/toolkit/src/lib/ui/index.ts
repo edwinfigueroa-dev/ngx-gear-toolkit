@@ -24,6 +24,8 @@ import { UiToastService } from './organisms/toast/services/ui-toast.service';
 import { UiCarouselComponent } from './organisms/carousel/carousel';
 import { UiCarouselItemDirective } from './organisms/carousel/directives/ui-carousel-item.directive';
 import { UiIconComponent } from './atoms/icon/icon';
+import { UiTabsComponent } from './molecules/tabs/tabs.component';
+import { UiTabComponent } from './molecules/tabs/components/tab/tab.component';
 
 // 2. Definimos todos como "Kits" por consistencia
 export const UiButton = [UiButtonComponent] as const;
@@ -47,6 +49,7 @@ export const UiDialog = [
 ] as const;
 export const UiToast = [UiToastComponent, UiToastItemDirective] as const;
 export const UiCarousel = [UiCarouselComponent, UiCarouselItemDirective] as const;
+export const UiTabs = [UiTabsComponent, UiTabComponent] as const;
 
 // 3. Exportamos las clases individuales (Obligatorio para el compilador)
 export {
@@ -75,4 +78,6 @@ export {
     UiToastItemDirective,
     UiCarouselItemDirective,
     UiCarouselComponent,
+    UiTabsComponent,
+    UiTabComponent,
 };
